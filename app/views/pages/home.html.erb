@@ -1,23 +1,26 @@
 <div class="page-header">
 	<h1>
-		Today's Orders <small> Through <%= @last_order_time %></small>
+		Today's Orders
+		<button id="refresh-button" class="btn btn-primary btn-large pull-right"><i class="icon-refresh icon-white"></i> Refresh</button>
 	</h1>
 </div>
-<div class="well">
-	<h2>
-		<small>Total orders</small> <%= number_to_currency(@total_orders) %>
-		<button id="refresh-button" class="btn btn-primary pull-right"><i class="icon-refresh icon-white"></i> Refresh</button>
+<div id="data-header" class="well">
+	<h2>	
+		<div class="header-first"><small>Total dollars</small> <%= number_to_currency(@total_dollars) %></div>
+		<div class="header-second"><small>Total orders</small> <%= @total_orders %></div>
+		<div class="header-third"><small>Total tickets</small> <%= @total_tickets %></div>
 	</h2>
 </div>
 <br />
 <table class="table table-striped table-bordered">
 	<thead>
-		<th>Order ID</th>
-		<th>Ordered At</th>
-		<th>Order Method</th>
-		<th>Amount</th>
-		<th>Event</th>
-		<th>Event Date</th>
+		<th>Order ID <i>&nbsp;</i></th>
+		<th>Ordered At <i>&nbsp;</i></th>
+		<th>Order Method <i>&nbsp;</i></th>
+		<th>Amount <i>&nbsp;</i></th>
+		<th>Tickets <i>&nbsp;</i></th>
+		<th>Event <i>&nbsp;</i></th>
+		<th>Event Date <i>&nbsp;</i></th>
 	</thead>
 	<% @orders.each do |order| %>
 	<tr>
@@ -25,6 +28,7 @@
 		<td><%= order[:order_date].strftime("%l:%M %p") %></td>
 		<td><%= order[:order_type_name] %></td>
 		<td><%= number_to_currency(order[:ticket_revenue]) %></td>
+		<td><%= order[:tickets] %></td>
 		<td><%= order[:event_name] %></td>
 		<td><%= order[:event_date].strftime("%b %e, %y") %></td>
 	</tr>

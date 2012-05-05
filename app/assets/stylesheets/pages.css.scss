@@ -1,3 +1,24 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.header-first, .header-second, .header-third {
+	float:left;
+	width: 33%;
+}
+
+.header-first {
+	text-align: left;
+}
+
+.header-second {
+	text-align: center;
+}
+
+.header-third {
+	text-align: right;
+}
+
+th {
+	cursor: pointer;
+	min-width: 99px;
+}

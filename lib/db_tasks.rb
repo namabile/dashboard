@@ -37,12 +37,3 @@ class DBTasks
 		results.drop
 	end
 end
-
-class Scheduler
-	scheduler = Rufus::Scheduler.start_new
-	
-	scheduler.every '5m' do
-		DBTasks.get_orders(1)
-		puts "orders updated"
-	end
-end
