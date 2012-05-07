@@ -7,10 +7,12 @@ scheduler.every '1m', :allow_overlapping => false, :tags => "update orders" do
 	puts "updating orders"
 	DBTasks.get_orders(1)
 	puts "orders updated"
+	Update.create(update_type: "orders updated")
 end
 
 scheduler.cron '0 0 * * *', :blocking => true, :tags => "refresh orders"  do
 	puts "refreshing orders"
 	DBTasks.get_orders()
 	puts "orders refreshed"
+	Update.create(update_type: "orders refreshed")
 end

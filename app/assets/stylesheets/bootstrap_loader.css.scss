@@ -10,3 +10,7 @@ body {
 #data-header {
 	@include clearfix();
 }
+
+#home-header { 
+	@include clearfix();
+}

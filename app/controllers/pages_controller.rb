@@ -5,6 +5,6 @@ class PagesController < ApplicationController
   	@total_dollars = @orders.sum(:ticket_revenue)
   	@total_orders = @orders.count(:order_id, distinct: true)
   	@total_tickets = @orders.sum(:tickets)
-  	@last_order_time = @orders.first[:order_date].localtime.strftime("%l:%M %p")
+  	@last_update = Update.find_last_by_update_type("orders updated")
   end
 end
