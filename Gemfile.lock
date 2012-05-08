@@ -22,6 +22,9 @@ GEM
       activesupport (= 3.2.1)
       arel (~> 3.0.0)
       tzinfo (~> 0.3.29)
+    activerecord-import (0.2.9)
+      activerecord (~> 3.0)
+      activerecord (~> 3.0)
     activeresource (3.2.1)
       activemodel (= 3.2.1)
       activesupport (= 3.2.1)
@@ -39,9 +42,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.1)
+    crack (0.3.1)
+    daemons (1.1.8)
     erubis (2.7.0)
+    eventmachine (1.0.0.beta.4.1-x86-mingw32)
     execjs (1.3.1)
       multi_json (~> 1.0)
+    garb (0.9.1)
+      activesupport (>= 2.2.0)
+      crack (>= 0.1.6)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -94,6 +103,10 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6-x86-mingw32)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -108,13 +121,17 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  activerecord-import
   annotate
   bootstrap-sass
   coffee-rails (~> 3.2.1)
+  eventmachine (= 1.0.0.beta.4.1)
+  garb
   jquery-rails
   rails (= 3.2.1)
   ruby-odbc
   rufus-scheduler
   sass-rails (~> 3.2.3)
   sqlite3
+  thin
   uglifier (>= 1.0.3)

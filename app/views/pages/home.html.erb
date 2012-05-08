@@ -1,5 +1,5 @@
 <div id="home-header" class="page-header">
-		<h1>Today's Orders <small><%= Time.now.strftime("%A %B %e, %Y") %></small><span class="label pull-right"><%= "Updated at #{@last_update[:created_at].strftime("%l:%M %p")}" %></span>
+		<h1>Today's Orders <small><%= Time.now.strftime("%A %B %e, %Y") %></small><span class="label pull-right"><%= "Updated at #{@last_update[:updated_at].strftime("%l:%M %p")}" %></span>
 			<!-- <button id="refresh-button" class="btn btn-primary btn-large pull-right"><i class="icon-refresh icon-white"></i> Refresh</button> -->
 		</h1>
 </div>

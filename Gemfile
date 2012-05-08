@@ -9,7 +9,10 @@ gem 'sqlite3'
 gem 'ruby-odbc'
 gem 'annotate'
 gem 'rufus-scheduler'
-
+gem 'eventmachine', '1.0.0.beta.4.1'
+gem 'thin'
+gem 'activerecord-import'
+gem 'garb'
 
 # Gems used only for assets and not required
 # in production environments by default.
