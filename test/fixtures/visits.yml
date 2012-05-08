@@ -1,0 +1,30 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date: 2012-05-08 12:11:06
+  medium: MyString
+  visits: 
+  orders: 
+  revenue: 1.5
+
+two:
+  date: 2012-05-08 12:11:06
+  medium: MyString
+  visits: 
+  orders: 
+  revenue: 1.5
+
+# == Schema Information
+#
+# Table name: visits
+#
+#  id         :integer         not null, primary key
+#  date       :datetime
+#  medium     :string(255)
+#  visits     :integer
+#  orders     :integer
+#  revenue    :float
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+

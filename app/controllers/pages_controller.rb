@@ -7,4 +7,9 @@ class PagesController < ApplicationController
   	@total_tickets = @orders.sum(:tickets)
   	@last_update = Update.find_last_by_update_type("orders updated")
   end
+
+  def visits
+  
+  end
+
 end

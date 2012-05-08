@@ -7,12 +7,11 @@ gem 'rails', '3.2.1'
 
 gem 'sqlite3'
 gem 'ruby-odbc'
-gem 'annotate'
 gem 'rufus-scheduler'
 gem 'eventmachine', '1.0.0.beta.4.1'
 gem 'thin'
 gem 'activerecord-import'
-gem 'garb'
+gem 'gattica', :git => 'git://github.com/chrisle/gattica.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,4 +37,7 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :development do
+	gem 'debugger'
+	gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git', :branch => 'rake_compatibility'
+end

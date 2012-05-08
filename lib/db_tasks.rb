@@ -39,4 +39,5 @@ class DBTasks
 		results.drop
 		conn.disconnect
 	end
+	
 end

@@ -1,3 +1,18 @@
+GIT
+  remote: git://github.com/chrisle/gattica.git
+  revision: 09dd828d8f065eff1f60a93207c66b7682e498b7
+  specs:
+    gattica (0.6.1)
+      hpricot
+      test-unit
+
+GIT
+  remote: git://github.com/jeremyolliver/annotate_models.git
+  revision: 4d57e4fe6360125f17886168120a48091a268e45
+  branch: rake_compatibility
+  specs:
+    annotate (2.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,7 +46,6 @@ GEM
     activesupport (3.2.1)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    annotate (2.4.0)
     arel (3.0.2)
     bootstrap-sass (2.0.2)
     builder (3.0.0)
@@ -42,16 +56,21 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.1)
-    crack (0.3.1)
+    columnize (0.3.6)
     daemons (1.1.8)
+    debugger (1.1.3)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.2)
+    debugger-linecache (1.1.1)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.2)
     erubis (2.7.0)
     eventmachine (1.0.0.beta.4.1-x86-mingw32)
     execjs (1.3.1)
       multi_json (~> 1.0)
-    garb (0.9.1)
-      activesupport (>= 2.2.0)
-      crack (>= 0.1.6)
     hike (1.2.1)
+    hpricot (0.8.6)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -103,6 +122,7 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6-x86-mingw32)
+    test-unit (2.4.8)
     thin (1.3.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -122,11 +142,12 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
-  annotate
+  annotate!
   bootstrap-sass
   coffee-rails (~> 3.2.1)
+  debugger
   eventmachine (= 1.0.0.beta.4.1)
-  garb
+  gattica!
   jquery-rails
   rails (= 3.2.1)
   ruby-odbc
