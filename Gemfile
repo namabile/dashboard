@@ -39,5 +39,5 @@ end
 # To use debugger
 group :development do
 	gem 'debugger'
-	gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git', :branch => 'rake_compatibility'
+	gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git'
 end
