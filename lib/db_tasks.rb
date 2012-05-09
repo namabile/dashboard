@@ -7,20 +7,25 @@ class DBTasks
 		start_date = Date.today.to_s
 		end_date = (Date.today + 1.day).to_s
 		run_revenue_query(start_date, end_date)
+		Update.post_update("orders updated")
 	end
 
 	def self.refresh_orders
+		Order.delete_all("order_year = #{Date.today.year}")
 		end_date = (Date.today + 1.day).to_s
 		start_date = (Date.today - 31.days).to_s
 		run_revenue_query(start_date, end_date)
+		Update.post_update("orders refreshed")
 	end
 
 	def self.get_last_years_orders
+		Order.delete_all("order_year = #{Date.today.prev_year.year}")
 		today_last_year = Date.today.years_ago(1)
 		offset = Date.today.wday - today_last_year.wday
 		end_date = (today_last_year + offset.days).to_s
 		start_date = (end_date.to_date - 31.days).to_s
 		run_revenue_query(start_date, end_date)
+		Update.post_update("last year's orders refreshed")
 	end
 
 	private
@@ -50,4 +55,5 @@ class DBTasks
 			results.drop
 			conn.disconnect
 		end
+
 end
