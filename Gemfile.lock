@@ -8,8 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/jeremyolliver/annotate_models.git
-  revision: 4d57e4fe6360125f17886168120a48091a268e45
-  branch: rake_compatibility
+  revision: 3fae3291247d3973287c6a951a3849dea25c680f
   specs:
     annotate (2.4.0)
 
