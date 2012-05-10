@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509004000) do
+ActiveRecord::Schema.define(:version => 20120510010844) do
 
   create_table "orders", :force => true do |t|
     t.integer  "order_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20120509004000) do
   add_index "updates", ["update_type"], :name => "index_updates_on_update_type"
 
   create_table "visits", :force => true do |t|
-    t.datetime "date"
+    t.date     "date"
     t.string   "medium"
     t.integer  "visits"
     t.integer  "orders"
@@ -55,5 +55,7 @@ ActiveRecord::Schema.define(:version => 20120509004000) do
     t.datetime "updated_at", :null => false
     t.string   "brand"
   end
+
+  add_index "visits", ["date"], :name => "index_visits_on_date"
 
 end
