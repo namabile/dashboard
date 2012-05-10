@@ -12,5 +12,5 @@ class PagesController < ApplicationController
   	@last_30_days = Visit.where("date >= ? and date < ?", Date.today - 30.days, Date.today)
   	@total_visits = @last_30_days.sum(:visits)
   end
-
+  
 end

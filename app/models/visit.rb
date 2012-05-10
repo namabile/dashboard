@@ -1,4 +1,5 @@
 class Visit < ActiveRecord::Base
+	validates_unqiueness_of :date, :scope => [:brand, :medium]
 end
 
 # == Schema Information

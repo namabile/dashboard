@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510010844) do
+ActiveRecord::Schema.define(:version => 20120510230745) do
 
   create_table "orders", :force => true do |t|
     t.integer  "order_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20120510010844) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "brand"
+    t.integer  "year"
   end
 
   add_index "visits", ["date"], :name => "index_visits_on_date"
