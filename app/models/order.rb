@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-	validates :purchase_id, :uniqueness => true
+	validates_uniqueness_of :purchase_id
 	validates :order_id, :purchase_id, :ticket_revenue, presence: true
 end
 # == Schema Information
