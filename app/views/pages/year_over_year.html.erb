@@ -4,8 +4,8 @@
 <table class="table table-bordered">
 	<thead>
 		<th class="empty-cell">&nbsp;</th>
-		<th colspan=3><%= Date.today.strftime("%A %b %e, %y") %></th>
-		<th colspan=3><%= @today_last_year.strftime("%A %b %e, %y") %></th>	
+		<th colspan=3><%= Date.today.strftime("%A %b %e, %Y") %></th>
+		<th colspan=3><%= @today_last_year.strftime("%A %b %e, %Y") %></th>	
 		<th colspan=3>% of Last Year</th>	
 	</thead>
 	<tr>
@@ -49,4 +49,17 @@
 			<% end %>
 		</tr>
 	<% end %>
+		<tr>
+			<td><strong>Total</strong></td>
+			<td><strong><%= number_to_currency(@this_year_totals[:total_revenue]) %></strong></td>
+			<td><strong><%= @this_year_totals[:total_orders] %></strong></td>
+			<td><strong><%= @this_year_totals[:total_tickets] %></strong></td>
+			<td><strong><%= number_to_currency(@last_year_totals[:total_revenue]) %></strong></td>
+			<td><strong><%= @last_year_totals[:total_orders] %></strong></td>
+			<td><strong><%= @last_year_totals[:total_tickets] %></strong></td>
+			<td><strong><%= number_to_percentage(@this_year_totals[:total_revenue].to_f / @last_year_totals[:total_revenue].to_f * 100, precision: 0) %></strong></td>
+			<td><strong><%= number_to_percentage(@this_year_totals[:total_orders].to_f / @last_year_totals[:total_orders].to_f  * 100, precision: 0) %></strong></td>
+			<td><strong><%= number_to_percentage(@this_year_totals[:total_tickets].to_f / @last_year_totals[:total_tickets].to_f  * 100, precision: 0) %></strong></td>
+
+		</tr>
 </table>

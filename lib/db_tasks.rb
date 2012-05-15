@@ -20,9 +20,8 @@ class DBTasks
 
 	def self.refresh_last_years_orders
 		Order.delete_all("order_year = #{Date.today.prev_year.year}")
-		today_last_year = Date.today.years_ago(1)
-		offset = Date.today.wday - today_last_year.wday
-		end_date = (today_last_year + offset.days + 1.day).to_s
+		offset = (0..6).to_a[Date.today.wday - Date.today.years_ago(1).wday]
+		end_date = (Date.today.years_ago(1) + offset.days + 1.day ).to_s
 		start_date = (end_date.to_date - 31.days).to_s
 		run_revenue_query(start_date, end_date)
 		Update.post_update("last year's orders refreshed")
@@ -32,8 +31,6 @@ class DBTasks
 		start_date = Order.find_by_order_year(2011, :order => "order_id desc")[:order_date].to_date + 1.day
 		end_date = start_date + 1.day
 		run_revenue_query(start_date.to_s, end_date.to_s)
-		puts start_date
-		puts end_date
 		Update.post_update("last year's orders updated")
 	end
 
