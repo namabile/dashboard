@@ -4,3 +4,8 @@
 jQuery ->
 	$("#refresh-button").bind "click", (event) => location.reload(true)
 	$(".table").tablesorter()
+	$(".date-input").datepicker();
+
+	$("#date-form")
+		.bind "ajax:beforeSend", (event) => $("#orders-container").spin()
+		.bind "ajax:complete", (event) => $("#orders-container").spin(false)

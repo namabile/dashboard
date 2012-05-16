@@ -12,6 +12,7 @@ gem 'eventmachine', '1.0.0.beta.4.1'
 gem 'thin'
 gem 'activerecord-import'
 gem 'gattica', :git => 'git://github.com/chrisle/gattica.git'
+gem 'bootstrap-datepicker-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

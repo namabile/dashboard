@@ -2,6 +2,8 @@ Dashboard::Application.routes.draw do
   root :to => "pages#home";
   match "30-day-visits" => "pages#visits", as: :visits
   match "year-over-year-comparison" => "pages#year_over_year", as: :yoy
+  match "ajax-test" => "pages#ajax_test", as: :ajax_test
+  match "get-total-orders" => "pages#get_total_orders", as: :get_total_orders
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

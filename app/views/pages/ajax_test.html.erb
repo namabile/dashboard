@@ -1,0 +1,15 @@
+<div class="page-header">
+	<h1>Ajax Test</h1>
+</div>
+<div id="date-inputs" class="">
+	<%= form_tag(get_total_orders_path, :method => "get", :remote => true, :class => "form-inline", :id => "date-form") do %>
+		<%= label_tag :start_date, "Start Date" %>
+		<%= text_field_tag :start_date, nil, class: "date-input span2" %>
+		<%= label_tag :end_date, "End Date" %>
+		<%= text_field_tag :end_date, nil, class: "date-input span2" %>
+		<%= submit_tag "Get Total Orders", class: "btn btn-primary" %>
+	<% end%>
+</div>
+<div id="orders-container">
+	&nbsp
+</div>

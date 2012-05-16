@@ -4,11 +4,14 @@
   <title>Razorgator Dashboard</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "http://fgnass.github.com/spin.js/dist/spin.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <%= render :partial => "shared/nav_bar" %>
 <%= yield %>
+<br />
+<%= debug(params) if Rails.env.development? %>
 
 </body>
 </html>

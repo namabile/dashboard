@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  require 'db_tasks'
+  respond_to :js
+
   def home
   	@orders = Order.where("order_date >= ? and order_date < ?", Date.today, Date.today + 1).order("order_id desc")
   	@total_dollars = @orders.sum(:ticket_revenue)
@@ -54,7 +55,13 @@ class PagesController < ApplicationController
   end
 
   def ajax_test
-        
+
+  end
+
+
+  def get_total_orders
+    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").where("order_date >= ? and order_date < ?", Date.strptime(params[:start_date], "%m/%d/%Y"), Date.strptime(params[:end_date], "%m/%d/%Y"))
+    respond_with @total_orders
   end
 
 end

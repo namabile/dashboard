@@ -46,6 +46,8 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    bootstrap-datepicker-rails (0.6.13)
+      railties (>= 3.0)
     bootstrap-sass (2.0.2)
     builder (3.0.0)
     coffee-rails (3.2.2)
@@ -142,6 +144,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   annotate!
+  bootstrap-datepicker-rails
   bootstrap-sass
   coffee-rails (~> 3.2.1)
   debugger
