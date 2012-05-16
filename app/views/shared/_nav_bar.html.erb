@@ -3,9 +3,26 @@
 		<div class="container">
 			<a class="brand" href="/">Razorgator Dashboard</a>
 			<ul class="nav pull-right">
-				<li><a href="/">Today's Orders</a></li>
-				<li><%= link_to "30-Day Visits", visits_path %></li>
-				<li><%= link_to "Year-over-Year Comparison", yoy_path %></li>
+				<li class="dropdown" id="orders_menu">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#orders-menu">
+						Orders Reports
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/">Today's Orders</a></li>
+						<li><%= link_to "Year-over-Year Comparison", yoy_path %></li>
+						<li><%= link_to "Total Orders by Date", total_orders_path %></li>
+					</ul>
+				</li>
+				<li class="dropdown" id="visits_menu">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#visits_menu">
+						Vistis Reports
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><%= link_to "30-Day Visits", visits_path %></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>

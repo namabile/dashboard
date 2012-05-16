@@ -54,13 +54,24 @@ class PagesController < ApplicationController
   # debugger
   end
 
-  def ajax_test
+  def total_orders
 
   end
 
 
   def get_total_orders
-    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").where("order_date >= ? and order_date < ?", Date.strptime(params[:start_date], "%m/%d/%Y"), Date.strptime(params[:end_date], "%m/%d/%Y"))
+    if params[:start_date] < params[:end_date]
+      start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+      end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
+    elsif params[:start_date] == params[:end_date]
+      start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+      end_date = Date.strptime(params[:end_date], "%m/%d/%Y") + 1.day
+    elsif params[:start_date] > params[:end_date]
+      start_date = Date.strptime(params[:end_date], "%m/%d/%Y")
+      end_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+    end
+
+    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").where("order_date >= ? and order_date < ?", start_date, end_date)
     respond_with @total_orders
   end
 

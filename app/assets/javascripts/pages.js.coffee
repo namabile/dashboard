@@ -7,5 +7,7 @@ jQuery ->
 	$(".date-input").datepicker();
 
 	$("#date-form")
-		.bind "ajax:beforeSend", (event) => $("#orders-container").spin()
+		.bind "ajax:beforeSend", (event) => 
+			$("#orders-container").html("&nbsp")
+			$("#orders-container").spin()
 		.bind "ajax:complete", (event) => $("#orders-container").spin(false)
