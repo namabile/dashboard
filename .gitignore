@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore precompiled assets and deployment bundle
+/vendor/assets/*

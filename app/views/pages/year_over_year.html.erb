@@ -24,6 +24,10 @@
 		<tr>
 			<td><%= type %></td>
 			<% if @this_year[type].nil? %>
+				<% @this_year[type] = {} %>
+				<% @this_year[type][:total_revenue] = 0 %>
+				<% @this_year[type][:total_orders] = 0 %>
+				<% @this_year[type][:total_tickets] = 0 %>
 				<td>$0.00</td>
 				<td>0</td>
 				<td>0</td>
