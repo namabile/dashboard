@@ -15,5 +15,5 @@
 /tmp
 
 # Ignore precompiled assets and deployment bundle
-/vendor/assets/*
 /vendor/bundle/*
+/public/assets/*
