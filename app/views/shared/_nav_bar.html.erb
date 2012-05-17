@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand" href="/">Razorgator Dashboard</a>
+			<a class="brand" href="/">Razorgator Reporting</a>
 			<ul class="nav pull-right">
 				<li class="dropdown" id="orders_menu">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#orders-menu">
@@ -21,6 +21,15 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><%= link_to "30-Day Visits", visits_path %></li>
+					</ul>
+				</li>
+				<li class="dropdown" id="orders_menu">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#events-menu">
+						Event Reports
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><%= link_to "Ticket Inventory by Event", event_ticket_report_path %></li>
 					</ul>
 				</li>
 			</ul>

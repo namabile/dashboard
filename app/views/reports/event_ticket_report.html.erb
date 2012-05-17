@@ -1,0 +1,17 @@
+<div class="page-header">
+	<h1>Ticket Inventory by Event</h1>
+</div>
+<div id="report-inputs" class="well">
+	<%= form_tag(run_event_ticket_report_path, :method => "get", :remote => true, :class => "form-inline", :id => "report-form") do %>
+		<%= label_tag :event_name, "Event Name (optional)" %>
+		<%= text_field_tag :event_name, nil, :class => "span3" %>
+		<%= label_tag :start_date, "Event Start Date" %>
+		<%= text_field_tag :start_date, nil, :class => "date-input span2" %>
+		<%= label_tag :end_date, "Event End Date" %>
+		<%= text_field_tag :end_date, nil, :class => "date-input span2" %>
+		<%= submit_tag "Get Ticket Stats", :class => "btn btn-primary" %>
+	<% end%>
+</div>
+<div class="report-container">
+	&nbsp
+</div>

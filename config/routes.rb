@@ -4,6 +4,10 @@ Dashboard::Application.routes.draw do
   match "year-over-year-comparison" => "pages#year_over_year", as: :yoy
   match "total-orders" => "pages#total_orders", as: :total_orders
   match "get-total-orders" => "pages#get_total_orders", as: :get_total_orders
+  match "reports/event-ticket-report" => "reports#event_ticket_report", as: :event_ticket_report
+  match "reports/run-event-ticket-report" => "reports#run_event_ticket_report", as: :run_event_ticket_report
+  match "reports/export-to-excel" => "reports#export_to_excel", as: :export_to_excel
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

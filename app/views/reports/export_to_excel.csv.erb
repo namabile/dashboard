@@ -1,0 +1,21 @@
+<% headers = ["event_name", "event_category", "performance_date", "performance_time", "participant1", "participant2", "venue_name", "city", "state", "performance_url", "total_ticket_count", "total_ticket_value", "min_ticket_price", "max_ticket_price"] %>
+<%= CSV.generate_line(headers, :row_sep => nil).html_safe %>
+<% @results.each do |event| %>
+<%  row = [
+	event["event_name"],
+	event["event_category"],
+	event["performance_date"],
+	event["performance_time"],
+	event["participant1"],
+	event["participant2"],
+	event["venue_name"],
+	event["city"],
+	event["state"],
+	event["url"],
+	event["total_ticket_count"],
+	event["total_ticket_value"],
+	event["min_ticket_price"],
+	event["max_ticket_price"]
+	] %>
+<%= CSV.generate_line(row, :row_sep => nil).html_safe %>
+<% end %>
