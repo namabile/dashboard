@@ -1,14 +1,14 @@
 <div class="page-header">
 	<h1>Today's Orders Compared to Today Last Year<span class="label pull-right"><%= "Updated at #{@last_update[:updated_at].strftime("%l:%M %p")}" %></span></h1>
 </div>
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
 	<thead>
 		<th class="empty-cell">&nbsp;</th>
 		<th colspan=3><%= Date.today.strftime("%A %b %e, %Y") %></th>
 		<th colspan=3><%= @today_last_year.strftime("%A %b %e, %Y") %></th>	
 		<th colspan=3>% of Last Year</th>	
 	</thead>
-	<tr>
+	<thead>
 		<th>Order Method</th>
 		<th>Dollars</th>
 		<th>Orders</th>
@@ -19,7 +19,7 @@
 		<th>Dollars</th>
 		<th>Orders</th>
 		<th>Tickets</th>
-	</tr>
+	</thead>
 	<% @all_channels.each do |type| %>
 		<tr>
 			<td><%= type %></td>
