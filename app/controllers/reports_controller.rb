@@ -51,7 +51,24 @@ class ReportsController < ApplicationController
 		@results = JSON.parse(params[:results])
 		headers["Content-Disposition"] = "attachment; filename=ticket_inventory_by_event.csv"
 		render :layout => false
-		# respond_with @results
+	end
 
+	def spiff_report
+		
+	end
+
+	def run_spiff_report
+		@goal = params[:weekly_goal]
+		@week_end_date = Date.today + (5 - Date.today.wday).days
+		@week_start_date = @week_end_date - 6.days
+
+		orders = Order.where("order_date >= ? and order_date < ?", @week_start_date, @week_end_date + 1.day)
+		orders = orders.where(:order_type_name => ["RZG - Phone", "TickCo - Phone"])
+
+		@orders_by_type = orders.select("order_type_name, sum(ticket_revenue) as total_revenue, sum(tickets) as total_tickets, count(distinct order_id) as total_orders").group("order_type_name")
+		@agents = ["Blake.Dirickson","bridget.eldred","emma.perez","john.dunn","ryan.galovan"]
+		
+		@orders_by_agent = orders.select("agent, sum(ticket_revenue) as total_revenue, sum(tickets) as total_tickets, count(distinct order_id) as total_orders").where(:agent => @agents).group(:agent)
+		# debugger
 	end
 end

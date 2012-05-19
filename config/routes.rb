@@ -7,6 +7,8 @@ Dashboard::Application.routes.draw do
   match "reports/event-ticket-report" => "reports#event_ticket_report", as: :event_ticket_report
   match "reports/run-event-ticket-report" => "reports#run_event_ticket_report", as: :run_event_ticket_report
   match "reports/export-to-excel" => "reports#export_to_excel", as: :export_to_excel
+  match "reports/spiff-report" => "reports#spiff_report", as: :spiff_report
+  match "reports/run-spiff-report" => "reports#run_spiff_report", as: :run_spiff_report
 
 
   # The priority is based upon order of creation:

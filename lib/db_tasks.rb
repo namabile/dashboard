@@ -2,6 +2,10 @@ require 'odbc'
 require 'activerecord-import'
 
 class DBTasks
+	def self.refresh_all_orders
+		DBTasks.refresh_orders
+		DBTasks.refresh_last_years_orders
+	end
 
 	def self.update_orders
 		start_date = Date.today.to_s
@@ -38,11 +42,12 @@ class DBTasks
 		def self.run_revenue_query(start_date, end_date)
 			conn = ODBC.connect("sql03mia")
 			conn.timeout(60)
-			file = File.new('\\\fap01lax\nick.amabile$\SQL Queries\revenue_report.sql', 'rb')
+			file = File.new('\\\fap01lax\nick.amabile$\SQL Queries\revenue_report_v2.sql', 'rb')
 			sql = file.read.gsub("\n"," ").gsub("\t"," ").gsub("\r"," ")
 			file.close
 			results = conn.run(sql, start_date, end_date)
-			columns = [ :order_id, :purchase_id, :ticket_revenue, :order_date, :order_type_name, :event_category, :event_name, :event_date, :tickets, :order_year ]
+			columns = [ :order_id, :purchase_id, :ticket_revenue, :order_date, :order_type_name, :event_category, :event_name, :event_date, :tickets, :order_year, 
+				:agent, :requested_vendor_name, :assigned_vendor_name, :requested_vendor_type_name, :assigned_vendor_type_name, :cancelled, :assigned_ticket_cost]
 			values = []
 			results.fetch_hash do |row|
 				values.push([
@@ -55,8 +60,16 @@ class DBTasks
 					row["event_name"],
 					row["event_date"].to_s,
 					row["tickets"],
-					row["orderdate"].year])
+					row["orderdate"].year,
+					row["agent"],
+					row["requested_vendor_name"],
+					row["assigned_vendor_name"],
+					row["requested_vendor_type_name"],
+					row["assigned_vendor_type_name"],
+					row["cancelled"],
+					row["assigned_ticket_cost"]])
 			end
+			# debugger
 			Order.import columns, values, :validate => true
 			results.drop
 			conn.disconnect

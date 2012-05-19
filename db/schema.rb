@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511003409) do
+ActiveRecord::Schema.define(:version => 20120518202304) do
 
   create_table "orders", :force => true do |t|
     t.integer  "order_id"
     t.integer  "purchase_id"
     t.float    "ticket_revenue"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.datetime "order_date"
     t.string   "order_type_name"
     t.string   "event_category"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20120511003409) do
     t.integer  "order_year"
     t.string   "medium"
     t.string   "source"
+    t.string   "agent"
+    t.string   "requested_vendor_name"
+    t.string   "assigned_vendor_name"
+    t.string   "requested_vendor_type_name"
+    t.string   "assigned_vendor_type_name"
+    t.integer  "cancelled"
+    t.float    "assigned_ticket_cost"
   end
 
   add_index "orders", ["order_date"], :name => "index_orders_on_order_date"

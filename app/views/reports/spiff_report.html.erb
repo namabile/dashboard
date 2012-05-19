@@ -1,0 +1,13 @@
+<div class="page-header">
+	<h1>SPIFF Report</h1>
+</div>
+<div id="report-inputs" class="well">
+	<%= form_tag(run_spiff_report_path, :method => "get", :remote => true, :class => "form-inline", :id => "report-form") do %>
+		<%= label_tag :weekly_goal, "Weekly Goal" %>
+		<%= text_field_tag :weekly_goal, nil, :class => "span2" %>
+		<%= submit_tag "Get SPIFF Report", :class => "btn btn-primary" %>
+	<% end%>
+</div>
+<div class="report-container">
+	&nbsp
+</div>
