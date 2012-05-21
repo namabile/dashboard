@@ -63,8 +63,8 @@ class ReportsController < ApplicationController
 		@week_start_date = @week_end_date - 6.days
 
 		order_types = ["RZG - Phone", "TickCo - Phone"]
-		orders = Order.where(:order_date => (@week_start_date..@week_end_date), :cancelled => false, :order_type_name => order_types)
-		@orders_by_type = orders.select("order_type_name, sum(ticket_revenue) as total_revenue, count(distinct order_id) as total_orders, sum(tickets) as total_tickets").group(:order_type_name)
+		orders = Order.good.order_date_between(@week_start_date, @week_end_date).where(:order_type_name => order_types)
+		@orders_by_type = orders.get_totals_by_group("order_type_name")
 
 		@orders_by_type_totals = {}
 		@orders_by_type_totals[:total_revenue] = orders.sum(:ticket_revenue)
@@ -72,9 +72,9 @@ class ReportsController < ApplicationController
 		@orders_by_type_totals[:total_tickets] = orders.sum(:tickets)
 		
 		agents = ["Blake.Dirickson","bridget.eldred","emma.perez","john.dunn","ryan.galovan"]
-		new_orders = Order.where(:order_date => (@week_start_date..(@week_end_date + 1.day)), :cancelled => false, :order_type_name => order_types, :agent => agents)
+		new_orders = Order.good.order_date_between(@week_start_date, @week_end_date).where(:order_type_name => order_types, :agent => agents)
 		
-		@orders_by_agent = new_orders.select("agent, sum(ticket_revenue) as total_revenue, count(distinct order_id) as total_orders, sum(tickets) as total_tickets").group(:agent)
+		@orders_by_agent = new_orders.get_totals_by_group("agent")
 		
 		@orders_by_agent_totals = {}
 		@orders_by_agent_totals[:total_revenue] = new_orders.sum(:ticket_revenue)
@@ -84,6 +84,5 @@ class ReportsController < ApplicationController
 		@pct_of_goal = @orders_by_type_totals[:total_revenue].to_f / goal.to_f * 100
 		@agents = agents.map { |x| x.gsub("."," ").partition(" ").map {|y| y.capitalize}.join }
 		@last_update = Update.find_last_by_update_type("orders updated")
-		# debugger
 	end
 end

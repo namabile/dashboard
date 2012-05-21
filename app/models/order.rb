@@ -1,6 +1,16 @@
 class Order < ActiveRecord::Base
 	validates_uniqueness_of :purchase_id
 	validates :order_id, :purchase_id, :ticket_revenue, presence: true
+	scope :good, where(:cancelled => false)
+	scope :mercury, where(:assigned_vendor_name => "Ticket Network Direct")
+
+	def self.get_totals_by_group(group)
+		select("#{group}, sum(ticket_revenue) as total_revenue, count(distinct order_id) as total_orders, sum(tickets) as total_tickets").group(group)
+	end
+
+	def self.order_date_between(start_date, end_date)
+		where(:order_date => start_date..end_date)
+	end
 end
 # == Schema Information
 #
