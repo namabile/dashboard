@@ -1,4 +1,6 @@
-<h3>Week Ending <%= @week_end_date.strftime("%A %b %e, %Y") %></h3>
+<h2><%= number_to_percentage(@pct_of_goal, :precision => 1) %> of Goal <small>Week Ending <%= @week_end_date.strftime("%A %b %e, %Y") %></small></h2>
+<br />
+<h3>Sales by Rep</h3>
 <table class="table table-striped table-bordered">
 	<thead>
 		<th>Sales Rep</th>
@@ -6,17 +8,40 @@
 		<th>Revenue</th>
 	</thead>
 	<tbody>
-		<% @orders_by_agent.each do |agent| %>
+		<% @orders_by_agent.each_with_index do |agent, index| %>
 		<tr>
-			<td><%= agent[:agent] %></td>
-			<td><%= agent[:total_orders] %></td>
+			<td><%= @agents[index] %></td>
+			<td><%= number_with_delimiter(agent[:total_orders]) %></td>
 			<td><%= number_to_currency(agent[:total_revenue]) %></td>
 		</tr>
 		<% end %>
 		<tr>
 			<td>Total</td>
-			<td>Total Orders</td>
-			<td>Total Revenue</td>
+			<td><%= number_with_delimiter(@orders_by_agent_totals[:total_orders]) %></td>
+			<td><%= number_to_currency(@orders_by_agent_totals[:total_revenue]) %></td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<h3>Sales by Order Type</h3>
+<table class="table table-striped table-bordered">
+	<thead>
+		<th>Order Type</th>
+		<th>Orders</th>
+		<th>Revenue</th>
+	</thead>
+	<tbody>
+		<% @orders_by_type.each do |type| %>
+		<tr>
+			<td><%= type[:order_type_name] %></td>
+			<td><%= number_with_delimiter(type[:total_orders]) %></td>
+			<td><%= number_to_currency(type[:total_revenue]) %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td>Total</td>
+			<td><%= number_with_delimiter(@orders_by_type_totals[:total_orders]) %></td>
+			<td><%= number_to_currency(@orders_by_type_totals[:total_revenue]) %></td>
 		</tr>
 	</tbody>
 </table>

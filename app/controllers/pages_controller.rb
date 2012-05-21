@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   respond_to :js
 
   def home
-  	@orders = Order.where("order_date >= ? and order_date < ?", Date.today, Date.today + 1).order("order_id desc")
+  	@orders = Order.where("order_date >= ? and order_date < ? and cancelled = 0", Date.today, Date.today + 1).order("order_id desc")
   	@total_dollars = @orders.sum(:ticket_revenue)
   	@total_orders = @orders.count(:order_id, distinct: true)
   	@total_tickets = @orders.sum(:tickets)
@@ -15,13 +15,13 @@ class PagesController < ApplicationController
   end
 
   def year_over_year
-  	orders = Order.where("order_date >= ? and order_date < ?", Date.today, Date.today + 1).order("order_id desc")
+  	orders = Order.where("order_date >= ? and order_date < ? and cancelled = 0", Date.today, Date.today + 1).order("order_id desc")
   	@last_update = Update.find_last_by_update_type("orders updated")
 
   	offset = (0..6).to_a[Date.today.wday - Date.today.years_ago(1).wday]
   	@today_last_year = Date.today.years_ago(1) + offset.days
 
-  	last_years_orders = Order.where("order_date >= ? and order_date < ?", @today_last_year, @today_last_year + 1.day)
+  	last_years_orders = Order.where("order_date >= ? and order_date < ? and cancelled = 0", @today_last_year, @today_last_year + 1.day)
   	last_years_orders_by_type = last_years_orders.select("order_type_name, sum(ticket_revenue) as total_revenue, count(distinct order_id) as total_orders, sum(tickets) as total_tickets").group("order_type_name")
   	@last_year = {}
   	last_years_orders_by_type.each do |type|
@@ -71,7 +71,7 @@ class PagesController < ApplicationController
       end_date = Date.strptime(params[:start_date], "%m/%d/%Y")
     end
 
-    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").where("order_date >= ? and order_date < ?", start_date, end_date)
+    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").where("order_date >= ? and order_date < ? and cancelled = 0", start_date, end_date)
     respond_with @total_orders
   end
 
