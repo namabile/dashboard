@@ -9,7 +9,8 @@ class Order < ActiveRecord::Base
 	end
 
 	def self.order_date_between(start_date, end_date)
-		where(:order_date => start_date..end_date)
+		end_date = start_date + 1.day if start_date == end_date
+		where("order_date >= ? and order_date < ?", start_date, end_date)
 	end
 end
 # == Schema Information

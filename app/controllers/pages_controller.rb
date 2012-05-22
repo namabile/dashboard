@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   respond_to :js
 
   def home
-  	@orders = Order.where("order_date >= ? and order_date < ? and cancelled = 0", Date.today, Date.today + 1).order("order_id desc")
+  	@orders = Order.good.order_date_between(Date.today, Date.today).order("order_id desc")
   	@total_dollars = @orders.sum(:ticket_revenue)
   	@total_orders = @orders.count(:order_id, distinct: true)
   	@total_tickets = @orders.sum(:tickets)
@@ -15,14 +15,14 @@ class PagesController < ApplicationController
   end
 
   def year_over_year
-  	orders = Order.where("order_date >= ? and order_date < ? and cancelled = 0", Date.today, Date.today + 1).order("order_id desc")
+  	orders = Order.good.order_date_between(Date.today, Date.today)
   	@last_update = Update.find_last_by_update_type("orders updated")
 
   	offset = (0..6).to_a[Date.today.wday - Date.today.years_ago(1).wday]
   	@today_last_year = Date.today.years_ago(1) + offset.days
 
-  	last_years_orders = Order.where("order_date >= ? and order_date < ? and cancelled = 0", @today_last_year, @today_last_year + 1.day)
-  	last_years_orders_by_type = last_years_orders.select("order_type_name, sum(ticket_revenue) as total_revenue, count(distinct order_id) as total_orders, sum(tickets) as total_tickets").group("order_type_name")
+  	last_years_orders = Order.good.order_date_between(@today_last_year, @today_last_year)
+  	last_years_orders_by_type = last_years_orders.get_totals_by_group("order_type_name")
   	@last_year = {}
   	last_years_orders_by_type.each do |type|
   		@last_year[type[:order_type_name]] = {}
@@ -31,7 +31,7 @@ class PagesController < ApplicationController
   		@last_year[type[:order_type_name]][:total_tickets] = type[:total_tickets]
   	end
 
-  	this_years_orders_by_type = orders.select("order_type_name, sum(ticket_revenue) as total_revenue, count(distinct order_id) as total_orders, sum(tickets) as total_tickets").group("order_type_name")
+  	this_years_orders_by_type = orders.get_totals_by_group("order_type_name")
 	  @this_year = {}
 	  this_years_orders_by_type.each do |type|
   		@this_year[type[:order_type_name]] = {}
@@ -60,18 +60,10 @@ class PagesController < ApplicationController
 
 
   def get_total_orders
-    if params[:start_date] < params[:end_date]
-      start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
-      end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
-    elsif params[:start_date] == params[:end_date]
-      start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
-      end_date = Date.strptime(params[:end_date], "%m/%d/%Y") + 1.day
-    elsif params[:start_date] > params[:end_date]
-      start_date = Date.strptime(params[:end_date], "%m/%d/%Y")
-      end_date = Date.strptime(params[:start_date], "%m/%d/%Y")
-    end
+    start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+    end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
 
-    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").where("order_date >= ? and order_date < ? and cancelled = 0", start_date, end_date)
+    @total_orders = Order.select("sum(ticket_revenue) as total_revenue").order_date_between(start_date, end_date)
     respond_with @total_orders
   end
 

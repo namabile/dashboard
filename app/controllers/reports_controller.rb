@@ -63,7 +63,7 @@ class ReportsController < ApplicationController
 		@week_start_date = @week_end_date - 6.days
 
 		order_types = ["RZG - Phone", "TickCo - Phone"]
-		orders = Order.good.order_date_between(@week_start_date, @week_end_date).where(:order_type_name => order_types)
+		orders = Order.good.order_date_between(@week_start_date, @week_end_date + 1.day).where(:order_type_name => order_types)
 		@orders_by_type = orders.get_totals_by_group("order_type_name")
 
 		@orders_by_type_totals = {}
@@ -72,7 +72,7 @@ class ReportsController < ApplicationController
 		@orders_by_type_totals[:total_tickets] = orders.sum(:tickets)
 		
 		agents = ["Blake.Dirickson","bridget.eldred","emma.perez","john.dunn","ryan.galovan"]
-		new_orders = Order.good.order_date_between(@week_start_date, @week_end_date).where(:order_type_name => order_types, :agent => agents)
+		new_orders = Order.good.order_date_between(@week_start_date, @week_end_date + 1.day).where(:order_type_name => order_types, :agent => agents)
 		
 		@orders_by_agent = new_orders.get_totals_by_group("agent")
 		
@@ -84,5 +84,6 @@ class ReportsController < ApplicationController
 		@pct_of_goal = @orders_by_type_totals[:total_revenue].to_f / goal.to_f * 100
 		@agents = agents.map { |x| x.gsub("."," ").partition(" ").map {|y| y.capitalize}.join }
 		@last_update = Update.find_last_by_update_type("orders updated")
+		debugger
 	end
 end
