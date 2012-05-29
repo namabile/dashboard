@@ -1,20 +1,23 @@
-require "rubygems"
-require "rufus/scheduler"
+if Rails.env.production?
 
-# scheduler = Rufus::Scheduler.start_new
+	require "rubygems"
+	require "rufus/scheduler"
 
-# scheduler.every '1m', :allow_overlapping => false, :blocking => true, :tags => "update orders" do
-# 	DBTasks.update_orders
-# end
+	scheduler = Rufus::Scheduler.start_new
 
-# scheduler.cron '0 0 * * *', :allow_overlapping => false, :blocking => true, :tags => "refresh orders"  do
-# 	DBTasks.refresh_orders
-# end
+	scheduler.every '1m', :allow_overlapping => false, :blocking => true, :tags => "update orders" do
+		DBTasks.update_orders
+	end
 
-# scheduler.cron '15 0 * * *', :allow_overlapping => false, :blocking => true, :tags => "update visits"  do
-# 	GoogleAnalytics.update_visits
-# end
+	scheduler.cron '0 0 * * *', :allow_overlapping => false, :blocking => true, :tags => "refresh orders"  do
+		DBTasks.refresh_orders
+	end
 
-# scheduler.cron '30 0 * * *', :allow_overlapping => false, :blocking => true, :tags => "update last year's orders"  do
-# 	DBTasks.update_last_years_orders
-# end
+	scheduler.cron '15 0 * * *', :allow_overlapping => false, :blocking => true, :tags => "update visits"  do
+		GoogleAnalytics.update_visits
+	end
+
+	scheduler.cron '30 0 * * *', :allow_overlapping => false, :blocking => true, :tags => "update last year's orders"  do
+		DBTasks.update_last_years_orders
+	end
+end
