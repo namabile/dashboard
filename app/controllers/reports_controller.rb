@@ -84,6 +84,5 @@ class ReportsController < ApplicationController
 		@pct_of_goal = @orders_by_type_totals[:total_revenue].to_f / goal.to_f * 100
 		@agents = agents.map { |x| x.gsub("."," ").partition(" ").map {|y| y.capitalize}.join }
 		@last_update = Update.find_last_by_update_type("orders updated")
-		debugger
 	end
 end
