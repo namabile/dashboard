@@ -28,8 +28,8 @@ class ReportsController < ApplicationController
 			@results_array.push({
 				:event_name => row["Event_Name"],
 				:event_category => row["event_category"],
-				:performance_date => row["performance_date"].to_date,
-				:performance_time => row["performance_time"].to_time,
+				:performance_date => row["performance_date"].to_s,
+				:performance_time => row["performance_time"].to_s,
 				:participant1 => row["participant1"],
 				:participant2 => row["participant2"],
 				:venue_name => row["venue_name"],

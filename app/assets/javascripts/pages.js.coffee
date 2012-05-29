@@ -4,10 +4,14 @@
 jQuery ->
 	$("#refresh-button").bind "click", (event) => location.reload(true)
 	$(".table").tablesorter()
-	$(".date-input").datepicker();
+	$(".date-input").datepicker()
+	$(".mercury").tooltip()
+	$(".mercury a").prevent_default()
 
 	$("#date-form")
 		.bind "ajax:beforeSend", (event) => 
 			$("#orders-container").html("&nbsp")
 			$("#orders-container").spin()
 		.bind "ajax:complete", (event) => $("#orders-container").spin(false)
+
+	
