@@ -8,7 +8,7 @@ if Rails.env.production?
 		DBTasks.update_orders
 	end
 
-	scheduler.every '10m', :allow_overlapping => false, :blocking => true, :tags => "refresh today's orders" do
+	scheduler.every '5m', :allow_overlapping => false, :blocking => true, :tags => "refresh today's orders" do
 		DBTasks.refresh_todays_orders
 	end
 

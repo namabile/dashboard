@@ -17,7 +17,7 @@ class DBTasks
 	def self.refresh_todays_orders
 		start_date = Date.today.to_s
 		end_date = (Date.today + 1.day).to_s
-		Order.delete_all.order_date_between(start_date, end_date)
+		Order.order_date_between(start_date, end_date).delete_all
 		run_revenue_query(start_date, end_date)
 		Update.post_update("todays orders refreshed")
 	end
