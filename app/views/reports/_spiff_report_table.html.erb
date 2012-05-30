@@ -1,5 +1,5 @@
 <h2>
-	<%= number_to_percentage(@pct_of_goal, :precision => 1) %> of Goal <small>Week Ending <%= @week_end_date.strftime("%A %b %e, %Y") %></small>
+	<%= number_to_percentage(@pct_of_goal, :precision => 1) %> of <%= number_to_currency(@goal, :precision => 0) %> Goal <small>Week Ending <%= @week_end_date.strftime("%A %b %e, %Y") %></small>
 	<span class="label pull-right"><%= "Updated at #{@last_update[:updated_at].strftime("%l:%M %p")}" %></span>
 </h2>
 <br />

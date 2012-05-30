@@ -58,7 +58,7 @@ class ReportsController < ApplicationController
 	end
 
 	def run_spiff_report
-		goal = params[:weekly_goal]
+		@goal = params[:weekly_goal]
 		@week_end_date = Date.today + (5 - Date.today.wday).days
 		@week_start_date = @week_end_date - 6.days
 
@@ -81,7 +81,7 @@ class ReportsController < ApplicationController
 		@orders_by_agent_totals[:total_orders] = new_orders.count(:order_id, :distinct => true)
 		@orders_by_agent_totals[:total_tickets] = new_orders.sum(:tickets)
 		
-		@pct_of_goal = @orders_by_type_totals[:total_revenue].to_f / goal.to_f * 100
+		@pct_of_goal = @orders_by_type_totals[:total_revenue].to_f / @goal.to_f * 100
 		@agents = agents.map { |x| x.gsub("."," ").partition(" ").map {|y| y.capitalize}.join }
 		@last_update = Update.find_last_by_update_type("orders updated")
 	end
