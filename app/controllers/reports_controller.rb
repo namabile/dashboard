@@ -71,7 +71,7 @@ class ReportsController < ApplicationController
 		@orders_by_type_totals[:total_orders] = orders.count(:order_id, :distinct => true)
 		@orders_by_type_totals[:total_tickets] = orders.sum(:tickets)
 		
-		agents = ["Blake.Dirickson","bridget.eldred","emma.perez","john.dunn","ryan.galovan"]
+		agents = ["Blake.Dirickson","bridget.eldred","danny.benesch","emma.perez","john.dunn","ryan.galovan"]
 		new_orders = Order.good.order_date_between(@week_start_date, @week_end_date + 1.day).where(:order_type_name => order_types, :agent => agents)
 		
 		@orders_by_agent = new_orders.get_totals_by_group("agent")
